@@ -2,10 +2,6 @@ let firstNum = '';
 let operator = '';
 let currentNum = '';
 
-
-//While firstNum = '';, function numberBtn. 
-
-
 let workingExpression = document.getElementById("workingExpression");
 
 // [ AC ]Clears workingExpression string
@@ -34,8 +30,6 @@ const numberBtn = document.getElementsByClassName("numberBtn");
         })
     }
 
-
-
 // [ operatorBtns ] Assigns operator functionality. Finalizes "firstNum," begins collecting currentNum
 const operatorBtn = document.getElementsByClassName("operatorBtn");
     for (let i = 0; i < operatorBtn.length; i++){
@@ -48,21 +42,12 @@ const operatorBtn = document.getElementsByClassName("operatorBtn");
         })
     }
 
-/*
-const update = function (){
-    console.log(firstNum)
-    console.log(operator)
-    console.log(currentNum)
-}
-*/
-
 const equal = document.getElementById("equal");
 equal.addEventListener('click', function(){
     calculate()
 
     workingExpression.textContent = firstNum;
 })
-
 
 function calculate(){
     let afterOperator = workingExpression.textContent.indexOf(operator);
@@ -85,39 +70,3 @@ function calculate(){
 
         console.log(currentNum)
 }
-
-
-
-
-
-
-/* [ Equal/operate ] Equal functionality.
-    Take the working expression as a string. Identify wherever it has any of the operators.
-    Split the string at those points. Ex, 1 + 2 x 4 / 8 will equal ("1", "2", "4", "8"). Not quite what we want.
-    Need to replace the operator strings with the actual operation methods. Need to also return all the string elements as an int.
-    workingExpression.replace("characterToBeReplaced", "What to be replaced with"). Replace ("X", *) << would this work?
-    If so, I get "1", +, "2", *, "4", / "8"
-    Then need to turn strings into int.
-*/
-
-function add(){
-
-    console.log();
-}
-
-function subtract(){
-
-    console.log();  
-}
-
-function multiply(){
-
-    console.log();
-}
-
-function divide(){
-
-    console.log();
-}
-
-console.log();
