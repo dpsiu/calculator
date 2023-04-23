@@ -1,49 +1,104 @@
-/* 
-Planning - 
-1. Need functions for +, -, *, /
-When a button is pressed, I want that logged as one of three variables in order.
-firstNum
-operator
-secondNum
-What do I want it logged as? 
-Event listener => firstNum. create event listener for each button?
-Expression needs to be blank, ready to take in the 3 variables. 
-Answer then set to variable firstNum (unless clear button is pressed, 
-    which, at any point, will clear working expression and be ready to
-    recieve firstNum again.)
-
-Needs a function that says if firstNum = ''; (empty), then add that string
-Will firstNum and secondNum be arrays that are concatenated into their values?
-This might be more optimal. firstNum and secondNum are arrays with each new #
-pressed being appended to the array. Once operator or = is pressed respectively, 
-the values are applied into the variables.
-
-Walk through my own use with calculator?
-
- - Assigning numbers to values. After each expression,
-    set operator and secondNum back to '':
-- Once operator button class is set, set the first string of numbers to firstNum.
-    then set operator button class to respective operator.
-- SecondNum is set once = is pressed? WHich then sets the string as secondNum, 
-    and performs firstNum operator secondNum followed by result.
-*/
-
 let firstNum = '';
 let operator = '';
-let secondNum = '';
+let currentNum = '';
 
 
+//While firstNum = '';, function numberBtn. 
 
-const numberBtn = document.getElementsByClassName("numberBtn");
-for (let i = 0; i < numberBtn.length; i++){
-    numberBtn[i].addEventListener('click', function(){
-        const text = this.textContent;
-        firstNum += text;
-        document.getElementById("workingExpression").textContent = firstNum;
+
+let workingExpression = document.getElementById("workingExpression");
+
+// [ AC ]Clears workingExpression string
+const allClear = document.getElementById("allClear");
+    allClear.addEventListener('click', function(){
+        workingExpression.textContent = '';
+        firstNum = '';
+        operator = '';
+        currentNum = '';
+        })
+
+// [ C ] Removes most recent character from working Expression
+const clear = document.getElementById("clear");
+    clear.addEventListener('click', function(){
+        workingExpression.textContent = workingExpression.textContent.slice(0, -1)
+
     })
+
+// [ numberBtns ] Assigns each numberBtn their respective value as a string, later turned into an int value
+const numberBtn = document.getElementsByClassName("numberBtn");
+    for (let i = 0; i < numberBtn.length; i++){
+        numberBtn[i].addEventListener('click', function(){
+            const text = this.textContent;
+            workingExpression.textContent += text;
+
+        })
+    }
+
+
+
+// [ operatorBtns ] Assigns operator functionality. Finalizes "firstNum," begins collecting currentNum
+const operatorBtn = document.getElementsByClassName("operatorBtn");
+    for (let i = 0; i < operatorBtn.length; i++){
+        operatorBtn[i].addEventListener('click', function(){
+            firstNum = workingExpression.textContent
+            const text = this.textContent;
+            operator = text.replace("x", '*').replace('÷', '/');
+            workingExpression.textContent += operator;
+
+        })
+    }
+
+/*
+const update = function (){
+    console.log(firstNum)
+    console.log(operator)
+    console.log(currentNum)
+}
+*/
+
+const equal = document.getElementById("equal");
+equal.addEventListener('click', function(){
+    calculate()
+
+    workingExpression.textContent = firstNum;
+})
+
+
+function calculate(){
+    let afterOperator = workingExpression.textContent.indexOf(operator);
+    currentNum = Number(workingExpression.textContent.substring(afterOperator + operator.length));
+    firstNum = Number(firstNum);
+
+    console.log(operator + 'operator')
+    console.log(afterOperator + 'afterOperator')
+    console.log(firstNum + 'firstNum')
+    console.log(currentNum + 'currentNUm')
+
+    if (operator === '+'){
+        firstNum += currentNum;
+    } else if (operator === '-'){
+        firstNum -= currentNum;
+    } else if (operator === '*'){
+        firstNum *= currentNum;
+    } else
+        firstNum /= currentNum;
+
+        console.log(currentNum)
 }
 
 
+
+
+
+
+/* [ Equal/operate ] Equal functionality.
+    Take the working expression as a string. Identify wherever it has any of the operators.
+    Split the string at those points. Ex, 1 + 2 x 4 / 8 will equal ("1", "2", "4", "8"). Not quite what we want.
+    Need to replace the operator strings with the actual operation methods. Need to also return all the string elements as an int.
+    workingExpression.replace("characterToBeReplaced", "What to be replaced with"). Replace ("X", *) << would this work?
+    If so, I get "1", +, "2", *, "4", / "8"
+    Then need to turn strings into int.
+*/
 
 function add(){
 

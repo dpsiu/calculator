@@ -9,7 +9,7 @@
     <h1 class="header">Calc</h1>
 
     <div class="calculator">
-        <div id="workingExpression"> 0 </div>
+        <div id="workingExpression" placeholder="0">  </div>
         <button class="Btn" id="allClear">AC</button>
         <button class="Btn" id="clear">C</button>
         <button class="operatorBtn" id="remainder">%</button>
@@ -17,7 +17,7 @@
         <button class="numberBtn" id="seven">7</button>
         <button class="numberBtn" id="eight">8</button>
         <button class="numberBtn" id="nine">9</button>
-        <button class="operatorBtn" id="multiply">X</button>
+        <button class="operatorBtn" id="multiply">x</button>
         <button class="numberBtn" id="four">4</button>
         <button class="numberBtn" id="five">5</button>
         <button class="numberBtn" id="six">6</button>
@@ -28,12 +28,16 @@
         <button class="operatorBtn" id="add">+</button>
         <button class="numberBtn" id="zero">0</button>
         <button class="numberBtn" id="decimal">.</button>
-        <button class="operatorBtn" id="equal">=</button>
+        <button class="calculateBtn" id="equal">=</button>
         </div>
     </div>
-    <h3 class="footer">Made by Denver Siu</h3>
-
-
+    <h3 class="footer">Copyright ©
+        <script>
+          document.write(new Date().getFullYear())
+        </script>
+        dpsiu
+    </h3>
+    
 
     <script src="app.js"></script>
 </body>
